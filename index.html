@@ -1,1 +1,105 @@
 
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spiriluna Sucos - Fresco e Funcional</title>
+  <style>
+    body{font-family: Arial,sans-serif;margin:0;padding:0;line-height:1.5;background:#f3f6f5;color:#123;}
+    header{background:#2E8B57;color:#fff;padding:20px;text-align:center;}
+    header h1{margin:0;font-size:28px;}
+    header p{margin:4px 0;font-size:16px;}
+    section{padding:20px;max-width:900px;margin:auto;}
+    h2{color:#2E8B57;}
+    .sabores{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:16px;}
+    .sabor{background:#fff;padding:12px;border-radius:12px;box-shadow:0 4px 10px rgba(0,0,0,0.1);width:160px;text-align:center;}
+    form{background:#fff;padding:20px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.1);max-width:500px;margin:auto;margin-top:20px;}
+    label{display:block;margin-top:10px;font-weight:bold;}
+    input,select,textarea{width:100%;padding:8px;margin-top:5px;border-radius:6px;border:1px solid #ccc;}
+    button{background:#2E8B57;color:#fff;padding:10px;margin-top:15px;border:none;border-radius:6px;cursor:pointer;width:100%;}
+    button:hover{background:#1b6e46;}
+    footer{text-align:center;padding:20px;background:#e6ffe6;margin-top:20px;font-size:14px;color:#254;}
+    .badge{display:inline-block;background:#ffd27f;color:#123;padding:4px 8px;border-radius:6px;font-size:12px;margin-top:8px;}
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Spiriluna Sucos</h1>
+  <p>Fresco, funcional e saudável</p>
+  <span class="badge">Produzido em conformidade com a ANVISA – BPF aprovado</span>
+</header>
+
+<section>
+  <h2>✨ Sabores Disponíveis</h2>
+  <div class="sabores">
+    <div class="sabor"><strong>Limão Detox</strong><p>250ml</p></div>
+    <div class="sabor"><strong>Abacaxi com Hortelã</strong><p>250ml</p></div>
+    <div class="sabor"><strong>Maracujá Tranquilidade</strong><p>250ml</p></div>
+    <div class="sabor"><strong>Frutas Vermelhas Energia</strong><p>250ml</p></div>
+    <div class="sabor"><strong>Spirulina Natural</strong><p>250ml</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>📋 Faça seu Pedido</h2>
+  <form id="pedidoForm">
+    <label for="cliente">Nome do Cliente / Loja:</label>
+    <input type="text" id="cliente" required>
+
+    <label for="sabor">Escolha o Sabor:</label>
+    <select id="sabor" required>
+      <option value="Limão Detox">Limão Detox</option>
+      <option value="Abacaxi com Hortelã">Abacaxi com Hortelã</option>
+      <option value="Maracujá Tranquilidade">Maracujá Tranquilidade</option>
+      <option value="Frutas Vermelhas Energia">Frutas Vermelhas Energia</option>
+      <option value="Spirulina Natural">Spirulina Natural</option>
+    </select>
+
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" min="1" value="1" required>
+
+    <label for="endereco">Endereço / Observações:</label>
+    <textarea id="endereco" rows="3"></textarea>
+
+    <button type="submit">Enviar Pedido</button>
+  </form>
+  <div id="resultado" style="margin-top:20px;display:none;background:#e6ffe6;padding:15px;border-radius:12px;"></div>
+</section>
+
+<section>
+  <h2>Sobre Nós</h2>
+  <p>Na <strong>Spiriluna Sucos</strong>, produzimos bebidas frescas e funcionais com Spirulina e Chlorella. Cada garrafinha entrega energia, nutrientes essenciais e bem-estar diário.</p>
+</section>
+
+<footer>
+  Contato: <a href="https://wa.me/5532995439612" target="_blank">WhatsApp Fábrica</a> | Email: qualitymoveis88@gmail.com<br>
+  © 2025 Spiriluna Sucos
+</footer>
+
+<script>
+  const precoUnitario = 6.00; // R$6,00 por unidade
+  const whatsappNumber = "5532995439612"; // número da fábrica com DDD
+
+  document.getElementById("pedidoForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    const cliente = document.getElementById("cliente").value;
+    const sabor = document.getElementById("sabor").value;
+    const quantidade = parseInt(document.getElementById("quantidade").value);
+    const endereco = document.getElementById("endereco").value || '-';
+    const total = (quantidade * precoUnitario).toFixed(2);
+
+    const msg = `Pedido Spiriluna Sucos\nCliente: ${cliente}\nSabor: ${sabor}\nQuantidade: ${quantidade}\nEndereço/Obs: ${endereco}\nTotal: R$${total}`;
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+    
+    document.getElementById("resultado").innerHTML = `<p>✅ Pedido preparado! Clique abaixo para enviar via WhatsApp:</p><a href="${url}" target="_blank"><button>Enviar Pedido</button></a>`;
+    document.getElementById("resultado").style.display = "block";
+
+    // Limpa formulário
+    document.getElementById("pedidoForm").reset();
+  });
+</script>
+
+</body>
+</html>
